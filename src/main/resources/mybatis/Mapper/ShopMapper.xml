@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sustart.mapper.ShopMapper">
+  <resultMap id="BaseResultMap" type="com.sustart.model.Shop">
+    <id column="shop_id" jdbcType="VARCHAR" property="shopId" />
+    <result column="password" jdbcType="VARCHAR" property="password" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="phone_number" jdbcType="VARCHAR" property="phoneNumber" />
+    <result column="address" jdbcType="VARCHAR" property="address" />
+    <result column="work_time" jdbcType="VARCHAR" property="workTime" />
+    <result column="role" jdbcType="VARCHAR" property="role" />
+    <result column="permission" jdbcType="VARCHAR" property="permission" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    shop_id, password, name, phone_number, address, work_time, role, permission
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from shop
+    where shop_id = #{shopId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from shop
+    where shop_id = #{shopId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.sustart.model.Shop">
+    insert into shop (shop_id, password, name, 
+      phone_number, address, work_time, 
+      role, permission)
+    values (#{shopId,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, 
+      #{phoneNumber,jdbcType=VARCHAR}, #{address,jdbcType=VARCHAR}, #{workTime,jdbcType=VARCHAR}, 
+      #{role,jdbcType=VARCHAR}, #{permission,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.sustart.model.Shop">
+    insert into shop
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="shopId != null">
+        shop_id,
+      </if>
+      <if test="password != null">
+        password,
+      </if>
+      <if test="name != null">
+        name,
+      </if>
+      <if test="phoneNumber != null">
+        phone_number,
+      </if>
+      <if test="address != null">
+        address,
+      </if>
+      <if test="workTime != null">
+        work_time,
+      </if>
+      <if test="role != null">
+        role,
+      </if>
+      <if test="permission != null">
+        permission,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="shopId != null">
+        #{shopId,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null">
+        #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="phoneNumber != null">
+        #{phoneNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null">
+        #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="workTime != null">
+        #{workTime,jdbcType=VARCHAR},
+      </if>
+      <if test="role != null">
+        #{role,jdbcType=VARCHAR},
+      </if>
+      <if test="permission != null">
+        #{permission,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.sustart.model.Shop">
+    update shop
+    <set>
+      <if test="password != null">
+        password = #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null">
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="phoneNumber != null">
+        phone_number = #{phoneNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null">
+        address = #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="workTime != null">
+        work_time = #{workTime,jdbcType=VARCHAR},
+      </if>
+      <if test="role != null">
+        role = #{role,jdbcType=VARCHAR},
+      </if>
+      <if test="permission != null">
+        permission = #{permission,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where shop_id = #{shopId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.sustart.model.Shop">
+    update shop
+    set password = #{password,jdbcType=VARCHAR},
+      name = #{name,jdbcType=VARCHAR},
+      phone_number = #{phoneNumber,jdbcType=VARCHAR},
+      address = #{address,jdbcType=VARCHAR},
+      work_time = #{workTime,jdbcType=VARCHAR},
+      role = #{role,jdbcType=VARCHAR},
+      permission = #{permission,jdbcType=VARCHAR}
+    where shop_id = #{shopId,jdbcType=VARCHAR}
+  </update>
+</mapper>

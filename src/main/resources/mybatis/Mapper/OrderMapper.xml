@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sustart.mapper.OrderMapper">
+  <resultMap id="BaseResultMap" type="com.sustart.model.Order">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="student_id" jdbcType="VARCHAR" property="studentId" />
+    <result column="cart_id" jdbcType="INTEGER" property="cartId" />
+    <result column="shop_id" jdbcType="VARCHAR" property="shopId" />
+    <result column="amount" jdbcType="REAL" property="amount" />
+    <result column="address_id" jdbcType="INTEGER" property="addressId" />
+    <result column="datetime" jdbcType="TIMESTAMP" property="datetime" />
+    <result column="status" jdbcType="VARCHAR" property="status" />
+    <result column="comment" jdbcType="VARCHAR" property="comment" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, student_id, cart_id, shop_id, amount, address_id, datetime, status, comment
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from order
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from order
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.sustart.model.Order">
+    insert into order (id, student_id, cart_id, 
+      shop_id, amount, address_id, 
+      datetime, status, comment
+      )
+    values (#{id,jdbcType=INTEGER}, #{studentId,jdbcType=VARCHAR}, #{cartId,jdbcType=INTEGER}, 
+      #{shopId,jdbcType=VARCHAR}, #{amount,jdbcType=REAL}, #{addressId,jdbcType=INTEGER}, 
+      #{datetime,jdbcType=TIMESTAMP}, #{status,jdbcType=VARCHAR}, #{comment,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.sustart.model.Order">
+    insert into order
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="studentId != null">
+        student_id,
+      </if>
+      <if test="cartId != null">
+        cart_id,
+      </if>
+      <if test="shopId != null">
+        shop_id,
+      </if>
+      <if test="amount != null">
+        amount,
+      </if>
+      <if test="addressId != null">
+        address_id,
+      </if>
+      <if test="datetime != null">
+        datetime,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+      <if test="comment != null">
+        comment,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="studentId != null">
+        #{studentId,jdbcType=VARCHAR},
+      </if>
+      <if test="cartId != null">
+        #{cartId,jdbcType=INTEGER},
+      </if>
+      <if test="shopId != null">
+        #{shopId,jdbcType=VARCHAR},
+      </if>
+      <if test="amount != null">
+        #{amount,jdbcType=REAL},
+      </if>
+      <if test="addressId != null">
+        #{addressId,jdbcType=INTEGER},
+      </if>
+      <if test="datetime != null">
+        #{datetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="comment != null">
+        #{comment,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.sustart.model.Order">
+    update order
+    <set>
+      <if test="studentId != null">
+        student_id = #{studentId,jdbcType=VARCHAR},
+      </if>
+      <if test="cartId != null">
+        cart_id = #{cartId,jdbcType=INTEGER},
+      </if>
+      <if test="shopId != null">
+        shop_id = #{shopId,jdbcType=VARCHAR},
+      </if>
+      <if test="amount != null">
+        amount = #{amount,jdbcType=REAL},
+      </if>
+      <if test="addressId != null">
+        address_id = #{addressId,jdbcType=INTEGER},
+      </if>
+      <if test="datetime != null">
+        datetime = #{datetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="comment != null">
+        comment = #{comment,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.sustart.model.Order">
+    update order
+    set student_id = #{studentId,jdbcType=VARCHAR},
+      cart_id = #{cartId,jdbcType=INTEGER},
+      shop_id = #{shopId,jdbcType=VARCHAR},
+      amount = #{amount,jdbcType=REAL},
+      address_id = #{addressId,jdbcType=INTEGER},
+      datetime = #{datetime,jdbcType=TIMESTAMP},
+      status = #{status,jdbcType=VARCHAR},
+      comment = #{comment,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

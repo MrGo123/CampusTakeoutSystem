@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sustart.mapper.StudentMapper">
+  <resultMap id="BaseResultMap" type="com.sustart.model.Student">
+    <id column="phone_number" jdbcType="VARCHAR" property="phoneNumber" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="password" jdbcType="VARCHAR" property="password" />
+    <result column="default_address" jdbcType="INTEGER" property="defaultAddress" />
+    <result column="role" jdbcType="VARCHAR" property="role" />
+    <result column="permission" jdbcType="VARCHAR" property="permission" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    phone_number, name, password, default_address, role, permission
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from student
+    where phone_number = #{phoneNumber,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from student
+    where phone_number = #{phoneNumber,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.sustart.model.Student">
+    insert into student (phone_number, name, password, 
+      default_address, role, permission
+      )
+    values (#{phoneNumber,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, 
+      #{defaultAddress,jdbcType=INTEGER}, #{role,jdbcType=VARCHAR}, #{permission,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.sustart.model.Student">
+    insert into student
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="phoneNumber != null">
+        phone_number,
+      </if>
+      <if test="name != null">
+        name,
+      </if>
+      <if test="password != null">
+        password,
+      </if>
+      <if test="defaultAddress != null">
+        default_address,
+      </if>
+      <if test="role != null">
+        role,
+      </if>
+      <if test="permission != null">
+        permission,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="phoneNumber != null">
+        #{phoneNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null">
+        #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="defaultAddress != null">
+        #{defaultAddress,jdbcType=INTEGER},
+      </if>
+      <if test="role != null">
+        #{role,jdbcType=VARCHAR},
+      </if>
+      <if test="permission != null">
+        #{permission,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.sustart.model.Student">
+    update student
+    <set>
+      <if test="name != null">
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null">
+        password = #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="defaultAddress != null">
+        default_address = #{defaultAddress,jdbcType=INTEGER},
+      </if>
+      <if test="role != null">
+        role = #{role,jdbcType=VARCHAR},
+      </if>
+      <if test="permission != null">
+        permission = #{permission,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where phone_number = #{phoneNumber,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.sustart.model.Student">
+    update student
+    set name = #{name,jdbcType=VARCHAR},
+      password = #{password,jdbcType=VARCHAR},
+      default_address = #{defaultAddress,jdbcType=INTEGER},
+      role = #{role,jdbcType=VARCHAR},
+      permission = #{permission,jdbcType=VARCHAR}
+    where phone_number = #{phoneNumber,jdbcType=VARCHAR}
+  </update>
+</mapper>
